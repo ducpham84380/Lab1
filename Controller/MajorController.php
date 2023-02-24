@@ -33,12 +33,34 @@ class MajorController
         require_once("Views/List.php");
     }
 
-    function add()
+    function detele()
     {
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $id = $_GET['id'];
             $this->model->deleteStudent( $id);
             header("Location: ?r=list");
+        }
+    }
+
+    function edit()
+    {
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $id = $_GET['id'];
+            $student = $this->model->getById($id);
+            require_once("Views/Edit.php");
+        }
+    }
+
+    function update()
+    {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $id = $_POST['id'];
+            $hoten = $_POST['name'];
+            $lop = $_POST['class'];
+            $chuyennghanh = $_POST['major'];
+            $mssv = $_POST['studentID'];
+            $this->model->addStudent( $mssv, $hoten, $lop, $chuyennghanh);
+            header("Location: Index.php");
         }
     }
 
